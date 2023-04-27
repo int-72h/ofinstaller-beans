@@ -28,13 +28,13 @@ def update_version_file():
     file, which is what the game itself uses directly to show the version number on the main menu, etc.
     """
     try:
-        old_version_file = open(vars.INSTALL_PATH + '/tf2classic/version.txt', 'r')
+        old_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + 'version.txt', 'r')
         old_version = old_version_file.readlines()[1]
         before, sep, after = old_version.partition('=')
         if len(after) > 0:
             old_version = after
         old_version = old_version.replace('.', '')
-        new_version_file = open(vars.INSTALL_PATH + '/tf2classic/rev.txt', 'w')
+        new_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + 'rev.txt', 'w')
         # We unconditionally overwrite rev.txt since version.txt is the canonical file.
         new_version_file.write(old_version)
         new_version_file.close()
@@ -49,7 +49,7 @@ def update_version_file():
 
 def get_installed_version():
     update_version_file()
-    local_version_file = open(vars.INSTALL_PATH + '/tf2classic/rev.txt', 'r')
+    local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + 'rev.txt', 'r')
     local_version = local_version_file.read().rstrip('\n')
     return local_version
 
@@ -59,14 +59,14 @@ def check_for_updates():
     """
 
     # This probably was already communicated to the user in update_version_file(), but if version.txt doesn't exist, skip updating.
-    if not path.exists(vars.INSTALL_PATH + '/tf2classic/version.txt'):
+    if not path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'version.txt'):
         if gui.message_yes_no(_("No game installation detected at given sourcemods path. Do you want to install the game?")):
             return False
         else:
             gui.message_end(_("We have nothing to do. Goodbye!"), 0)
 
     try:
-        local_version_file = open(vars.INSTALL_PATH + '/tf2classic/rev.txt', 'r')
+        local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + 'rev.txt', 'r')
         local_version = local_version_file.read().rstrip('\n')
     except ValueError:
         if gui.message_yes_no(_("We can't read the version of your installation. It could be corrupted. Do you want to reinstall the game?"), False):

@@ -21,7 +21,7 @@ INSTALL_PATH = None
 TF2C_PATH = None
 
 SCRIPT_MODE = len(sys.argv) > 1
-
+DATA_DIR = "/tf2classic/"
 SOURCE_URL = 'https://wiki.tf2classic.com/kachemak/'
 
 # Only on Linux

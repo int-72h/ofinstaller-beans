@@ -72,7 +72,7 @@ def wizard():
         versions.get_version_list()
 
         # Check if the game is already installed, for the purposes of running update_version_file() safely
-        if os.path.exists(vars.INSTALL_PATH + '/tf2classic/gameinfo.txt'):
+        if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
             vars.INSTALLED = True
             versions.update_version_file()
 
@@ -94,20 +94,20 @@ def manual_script():
     try:
         if sys.argv[1] == "--help":
             print(_(
-            '''Usage: TF2CDownloader [COMMAND] [PATH]
-Installation utility for TF2 Classic.
+            '''Usage: adastral [COMMAND] [PATH]
+Installation utility for sourcemods.
 
 If no arguments are provided, the downloader will be ran in setup mode, in
 which a series of questions will be asked to install the game for a regular
 user. This is what's used when opening the downloader from the desktop.
 
 Valid commands:
-  --install           installs TF2 Classic into a new folder inside PATH
-  --update            updates the pre-existing TF2 Classic installation in its
+  --install           installs a given sourcemod into a new folder inside PATH
+  --update            updates the pre-existing sourcemod installation in its
                       folder inside PATH
   --help              shows this
 
-PATH is the folder containing TF2 Classic's folder. This is usually the
+PATH is the folder containing the game's folder. This is usually the
 sourcemods folder for clients, or the Source dedicated server folder for
 servers.
 
@@ -123,11 +123,11 @@ path will be the current work directory.'''
             setup.setup_path_script()
             setup.setup_binaries()
 
-            if os.path.exists(vars.INSTALL_PATH + '/tf2classic/gameinfo.txt'):
+            if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
                 vars.INSTALLED = True
 
             if vars.INSTALLED:
-                gui.message(_("TF2 Classic is already installed. Assuming a reinstallation."))
+                gui.message(_("This sourcemod is already installed. Assuming a reinstallation."))
             downloads.install()
             troubleshoot.apply_blacklist()
             print(_("The installation has successfully completed. Remember to restart Steam!"))
@@ -138,11 +138,12 @@ path will be the current work directory.'''
             setup.setup_path_script()
             setup.setup_binaries()
 
-            if os.path.exists(vars.INSTALL_PATH + '/tf2classic/gameinfo.txt'):
+            if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
                 vars.INSTALLED = True
 
             if not vars.INSTALLED:
-                print(_("TF2 Classic isn't installed, cannot do an update. Consider using --install instead."))
+                print(_("this sourcemod isn't installed, cannot do an update. Consider using "
+                        "--install instead."))
                 exit(1)
             else:
                 vars.INSTALLED = versions.update_version_file()
