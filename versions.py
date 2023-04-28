@@ -103,7 +103,7 @@ def check_for_updates():
     # Finally, we ensure our local version has a patch available before continuing.
     patches = get_version_list()["patches"]
     if local_version in patches:
-        if gui.message_yes_no(_("An update is available for TF2 Classic. Do you want to install it?"), None, True):
+        if gui.message_yes_no(_("An update is available for the game. Do you want to install it?"), None, True):
             if gui.message_yes_no(_("If running, please close your game client and/or game launcher. Confirm once they're closed."), None, True):
                 return True
             else:

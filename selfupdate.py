@@ -27,9 +27,9 @@ def hash_script():
 def check_downloader_update():
     try:
         if system() == 'Windows':
-            remote_hash = httpx.get("https://wiki.tf2classic.com/kachemak/tf2cd_sha512sum_windows")
+            remote_hash = httpx.get(vars.UPDATE_HASH_URL_WINDOWS)
         else:
-            remote_hash = httpx.get("https://wiki.tf2classic.com/kachemak/tf2cd_sha512sum_linux")
+            remote_hash = httpx.get(vars.UPDATE_HASH_URL_LINUX)
     except httpx.RequestError:
         gui.message(_("WARNING: downloader failed to check itself for updates, potentially out-of-date."))
         return
@@ -38,10 +38,10 @@ def check_downloader_update():
     remote_hash_string = remote_hash_string.rstrip('\n')
 
     if remote_hash_string == hash_script():
-        gui.message(_("TF2CDownloader appears to be up-to-date."))
-    elif gui.message_yes_no(_("TF2CDownloader has an update available. Your current version may not work properly. Do you want to install it?")) and not vars.SCRIPT_MODE:
-        gui.message_end(_('Delete TF2CDownloader, then redownload and relaunch it from https://tf2classic.com/download'), 0)
+        gui.message(_("Adastral appears to be up-to-date."))
+    elif gui.message_yes_no(_("Adastral has an update available. Your current version may not work properly. Do you want to install it?")) and not vars.SCRIPT_MODE:
+        gui.message_end(_('Delete Adastral, then redownload and relaunch it from %s') % vars.UPDATE_DOWNLOAD_URL, 0)
     elif vars.SCRIPT_MODE:
-        gui.message(_("TF2CDownloader out-of-date."))
+        gui.message(_("Adastral out-of-date."))
     else:
         gui.message(_("User chose to skip update. Things may be broken."))
