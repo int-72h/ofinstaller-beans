@@ -21,6 +21,7 @@ INSTALL_PATH = None
 TF2C_PATH = None
 
 SCRIPT_MODE = len(sys.argv) > 1
+TARGET_GAME = "TF2 Classic" # supposed to help with localisation, but we'll see
 DATA_DIR = "/tf2classic/"
 SOURCE_URL = 'https://wiki.tf2classic.com/kachemak/'
 
@@ -34,5 +35,5 @@ UPDATE_DOWNLOAD_URL = 'https://tf2classic.com/download'
 
 # Only on Linux
 TO_SYMLINK = [
-    ["/tf2classic/bin/server.so", "/tf2classic/bin/server_srv.so"]
+    ["bin/server.so", "bin/server_srv.so"]
 ]

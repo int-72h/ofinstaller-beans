@@ -1,9 +1,10 @@
-# TF2CDownloader
-To end-users, this tool is the official installer and updater for Team Fortress 2 Classic. 
+# Adastral.
+## Downloading to the stars.
+To end-users, this tool... you shouldn't be using. use the official TF2Cdownloader and whatever OF is currently using.
 
-To programmers, this is a thin and rough script that sits on top of Aria2 and Butler to provide reasonably-efficient updating without too much complication.
+To programmers, this is a thin and rough script which is/will be backend agnostic for STVN vs Butler testing. Functionally similar to OFToast I (but functional).
 
-To other Sourcemods, this is a tool you can use for *your project* with only minor work, as the mechanism here is extremely agnostic and flexible. Get in touch with cco on our Discord if you're interested!
+To other Sourcemods, this is a tool you can use for your project with only minor work, as the mechanism here is extremely agnostic and flexible. Get in touch with cco or intcoms on Discord if you're interested!
 
 ----
 
@@ -17,6 +18,4 @@ The official build of Butler, as supplied by itch.io, is used.
 
 ----
 
-<a href="https://hosted.weblate.org/engage/tf2cdownloader/">
-<img src="https://hosted.weblate.org/widgets/tf2cdownloader/-/287x66-grey.png" alt="Translation status" />
-</a>
+Translations currently aren't up to scratch due to string changes. Don't use them.

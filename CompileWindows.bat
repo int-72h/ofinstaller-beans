@@ -1,1 +1,1 @@
-pyinstaller tf2c_downloader.spec
+pyinstaller adastral.spec

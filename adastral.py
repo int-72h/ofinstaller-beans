@@ -58,10 +58,10 @@ if os.getenv('LANG') is None:
         os.environ['LANG'] = lang
 
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    gettext.bindtextdomain('tf2c-downloader', os.path.abspath(os.path.join(os.path.dirname(__file__), 'locale')))
+    gettext.bindtextdomain('adastral', os.path.abspath(os.path.join(os.path.dirname(__file__), 'locale')))
 else:
-    gettext.bindtextdomain('tf2c-downloader', 'locale')
-gettext.textdomain('tf2c-downloader')
+    gettext.bindtextdomain('adastral', 'locale')
+gettext.textdomain('adastral')
 
 def wizard():
     try:

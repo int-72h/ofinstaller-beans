@@ -27,7 +27,7 @@ def data_generator():
 	return datas
 
 a = Analysis(
-    ['tf2c_downloader.py'],
+    ['adastral.py'],
     pathex=[],
     binaries=[],
     datas=data_generator(),
@@ -50,7 +50,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='tf2c_downloader',
+    name='adastral',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -63,5 +63,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='tf2c.ico',
+    icon='adastral.ico',
 )
