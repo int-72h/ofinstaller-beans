@@ -88,10 +88,10 @@ def setup_path(manual_path):
             vars.INSTALL_PATH = getcwd()
             confirm = True
         else:
-            vars.INSTALL_PATH = gui.message_dir(_("Please, enter the location in which TF2 Classic will be installed to.\n"))
+            vars.INSTALL_PATH = gui.message_dir(_("Please, enter the location in which the game will be installed to.\n"))
 
     if not confirm:
-        if not gui.message_yes_no(_("TF2 Classic will be installed in %s\nDo you accept?") % vars.INSTALL_PATH):
+        if not gui.message_yes_no(_("The game will be installed in %s\nDo you accept?") % vars.INSTALL_PATH):
             print(_("Reinitialising...\n"))
             setup_path(False)
 

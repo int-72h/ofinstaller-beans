@@ -23,13 +23,13 @@ def message(msg, delay = 0):
         sleep(delay)
 
 def main_menu():
-    print(_("""Welcome to TF2CDownloader. Enter a number to continue.\n
+    print(_("""Welcome to Adastral. Enter a number to continue.\n
         1 - Install or reinstall the game
         2 - Check for and apply any available updates
         3 - Verify and repair game files"""))
     user_choice = int(input())
     if user_choice == 1:
-        message(_("Starting the download for TF2 Classic... You may see some errors that are safe to ignore."), 3)
+        message(_("Starting the download for the game... You may see some errors that are safe to ignore."), 3)
         downloads.install()
         troubleshoot.apply_blacklist()
         message_end(_("The installation has successfully completed. Remember to restart Steam!"), 0)
@@ -39,7 +39,7 @@ def main_menu():
             downloads.update()
             message_end(_("The update has successfully completed."), 0)
         else:
-            message(_("Starting the download for TF2 Classic... You may see some errors that are safe to ignore."), 3)
+            message(_("Starting the download for the game... You may see some errors that are safe to ignore."), 3)
             downloads.install()
             troubleshoot.apply_blacklist()
             message_end(_("The installation has successfully completed. Remember to restart Steam!"), 0)
