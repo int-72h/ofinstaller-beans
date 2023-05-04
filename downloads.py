@@ -17,7 +17,11 @@ import versions
 def download(url, size):
     free_space_check(size, 'temporary')
 
+<<<<<<< HEAD
     run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UAdastral2023-04-26', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false','--allow-piece-length-change=true', '--seed-time=0',
+=======
+    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UTF2CDownloader2023-04-26', '--allow-piece-length-change=true', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
+>>>>>>> d74c4eb (Allow piece length changes to avert a niche error)
     '-d' + vars.TEMP_PATH, url], check=True)
 
 
