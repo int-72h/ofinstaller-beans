@@ -46,7 +46,9 @@ def main_menu():
 
     elif user_choice == 3:
         version_json = versions.get_version_list()["versions"]
-        downloads.butler_verify(vars.SOURCE_URL + version_json[versions.get_installed_version()]["signature"], vars.INSTALL_PATH + '/tf2classic', vars.SOURCE_URL + version_json[versions.get_installed_version()]["heal"])
+        downloads.butler_verify(vars.SOURCE_URL + version_json[versions.get_installed_version()][
+            "signature"], vars.INSTALL_PATH + vars.DATA_DIR, vars.SOURCE_URL + version_json[
+            versions.get_installed_version()]["heal"])
         message_end(_("The verification process has completed, and any corruption has been repaired."), 0)
 
     else:

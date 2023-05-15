@@ -16,8 +16,7 @@ import versions
 
 def download(url, size):
     free_space_check(size, 'temporary')
-
-    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UTF2CDownloader2023-04-26', '--allow-piece-length-change=true', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
+    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UAdastral-master', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false','--allow-piece-length-change=true', '--seed-time=0',
     '-d' + vars.TEMP_PATH, url], check=True)
 
 
@@ -53,7 +52,9 @@ def butler_verify(signature, gamedir, remote):
 def butler_patch(url, staging_dir, patchfilename, gamedir):
     if Path(staging_dir).exists() and Path(staging_dir).is_dir():
         rmtree(staging_dir)
-    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UTF2CDownloader2023-04-26', '--allow-piece-length-change=true', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
+    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UAdastral-master',
+         '--disable-ipv6=true',
+         '--allow-piece-length-change=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
     '-d' + vars.TEMP_PATH, url], check=True)
     gui.message(_("Patching your game with the new update, please wait patiently."), 1)
     run([vars.BUTLER_BINARY, 'apply', '--staging-dir=' + staging_dir, path.join(vars.TEMP_PATH, patchfilename), gamedir], check=True)
@@ -104,8 +105,8 @@ def do_symlink():
         return
 
     for s in vars.TO_SYMLINK:
-        if not path.isfile(vars.INSTALL_PATH + s[1]):
-            os.symlink(vars.INSTALL_PATH + s[0], vars.INSTALL_PATH + s[1])
+        if not path.isfile(vars.INSTALL_PATH + vars.DATA_DIR + s[1]):
+            os.symlink(vars.INSTALL_PATH + s[0], vars.INSTALL_PATH + vars.DATA_DIR + s[1])
 
 def install():
     version_json = versions.get_version_list()["versions"]
@@ -152,7 +153,7 @@ def update():
     heal_url = version_json[versions.get_installed_version()]["heal"]
 
     # Finally, verify and heal with the information we've gathered.
-    butler_verify(vars.SOURCE_URL + signature_url, vars.INSTALL_PATH + '/tf2classic', vars.SOURCE_URL + heal_url)
-    butler_patch(vars.SOURCE_URL + patch_url, vars.INSTALL_PATH + '/butler-staging', patch_file, vars.INSTALL_PATH + '/tf2classic')
+    butler_verify(vars.SOURCE_URL + signature_url, vars.INSTALL_PATH + vars.DATA_DIR, vars.SOURCE_URL + heal_url)
+    butler_patch(vars.SOURCE_URL + patch_url, vars.INSTALL_PATH + '/butler-staging', patch_file, vars.INSTALL_PATH + vars.DATA_DIR)
 
     do_symlink()
