@@ -22,16 +22,16 @@ TF2C_PATH = None
 
 SCRIPT_MODE = len(sys.argv) > 1
 TARGET_GAME = "TF2 Classic" # supposed to help with localisation, but we'll see
-DATA_DIR = "/tf2classic/"
-SOURCE_URL = 'https://wiki.tf2classic.com/kachemak/'
+DATA_DIR = "/open_fortress/"
+SOURCE_URL = 'https://beans.adastral.net/kachemak/'
 
 BLACKLIST_URL = 'https://tf2classic.org/serverlist/blacklist.php'
 BLACKLIST_PATH = '/tf2classic/cfg/server_blacklist.txt'
 
-UPDATE_HASH_URL_WINDOWS = SOURCE_URL + 'https://wiki.tf2classic.com/kachemak/tf2cd_sha512sum_windows'
-UPDATE_HASH_URL_LINUX = SOURCE_URL + 'https://wiki.tf2classic.com/kachemak/tf2cd_sha512sum_linux'
+UPDATE_HASH_URL_WINDOWS = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_windows'
+UPDATE_HASH_URL_LINUX = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_linux'
 
-UPDATE_DOWNLOAD_URL = 'https://tf2classic.com/download'
+UPDATE_DOWNLOAD_URL = 'https://openfortress.fun/download'
 
 # Only on Linux
 TO_SYMLINK = [

@@ -58,10 +58,10 @@ if os.getenv('LANG') is None:
         os.environ['LANG'] = lang
 
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    gettext.bindtextdomain('adastral', os.path.abspath(os.path.join(os.path.dirname(__file__), 'locale')))
+    gettext.bindtextdomain('beans', os.path.abspath(os.path.join(os.path.dirname(__file__), 'locale')))
 else:
-    gettext.bindtextdomain('adastral', 'locale')
-gettext.textdomain('adastral')
+    gettext.bindtextdomain('beans', 'locale')
+gettext.textdomain('beans')
 
 def wizard():
     try:
@@ -95,16 +95,16 @@ def manual_script():
     try:
         if sys.argv[1] == "--help":
             print(_(
-            '''Usage: adastral [COMMAND] [PATH]
-Installation utility for sourcemods.
+            '''Usage: beans [COMMAND] [PATH]
+Installation utility for Open Fortress.
 
 If no arguments are provided, the downloader will be ran in setup mode, in
 which a series of questions will be asked to install the game for a regular
 user. This is what's used when opening the downloader from the desktop.
 
 Valid commands:
-  --install           installs a given sourcemod into a new folder inside PATH
-  --update            updates the pre-existing sourcemod installation in its
+  --install           installs OF into a new folder inside PATH
+  --update            updates the pre-existing OF installation in its
                       folder inside PATH
   --help              shows this
 
@@ -128,7 +128,7 @@ path will be the current work directory.'''
                 vars.INSTALLED = True
 
             if vars.INSTALLED:
-                gui.message(_("This sourcemod is already installed. Assuming a reinstallation."))
+                gui.message(_("Open Fortress is already installed. Assuming a reinstallation."))
             downloads.install()
             troubleshoot.apply_blacklist()
             print(_("The installation has successfully completed. Remember to restart Steam!"))
@@ -143,7 +143,7 @@ path will be the current work directory.'''
                 vars.INSTALLED = True
 
             if not vars.INSTALLED:
-                print(_("this sourcemod isn't installed, cannot do an update. Consider using "
+                print(_("OF isn't installed, cannot do an update. Consider using "
                         "--install instead."))
                 exit(1)
             else:
@@ -163,7 +163,8 @@ path will be the current work directory.'''
         if ex is not SystemExit:
             traceback.print_exc()
             print(_("[italic magenta]----- Exception details above this line -----"))
-            print(_("[bold red]:warning: The program has failed. Post a screenshot in #technical-issues on the Discord. :warning:[/bold red]"))
+            print(_("[bold red]:warning: The program has failed. Post a screenshot in "
+                    "#troubleshooting on the Discord. :warning:[/bold red]"))
             exit(1)
 
 if vars.SCRIPT_MODE:

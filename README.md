@@ -1,12 +1,8 @@
-# Adastral.
-## Downloading to the stars.
-To end-users, this tool... you shouldn't be using. use the official TF2Cdownloader and whatever OF is currently using.
+# ofinstaller-beans
+## Sappho said we needed something in the interim. so here's beans
+To end-users, this tool is what you use to install/update OF whilst adastral's cooking in the oven.
 
-To programmers, this is a thin and rough script which is/will be backend agnostic for STVN vs Butler testing. Functionally similar to OFToast I (but functional).
-
-To other Sourcemods, this is a tool you can use for your project with only minor work, as the mechanism here is extremely agnostic and flexible. Get in touch with cco or intcoms on Discord if you're interested!
-
-----
+To programmers, this is a version of TF2Downloader genericized for use for OF with some spec changes to kachemak (beta branch mainly)
 
 Requires Rich, PyZstd, TQDM, and HTTPX to build.
 

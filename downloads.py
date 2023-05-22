@@ -16,7 +16,7 @@ import versions
 
 def download(url, size):
     free_space_check(size, 'temporary')
-    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UAdastral-master', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false','--allow-piece-length-change=true', '--seed-time=0',
+    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-Ubeans-master', '--disable-ipv6=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false','--allow-piece-length-change=true', '--seed-time=0',
     '-d' + vars.TEMP_PATH, url], check=True)
 
 
@@ -52,7 +52,7 @@ def butler_verify(signature, gamedir, remote):
 def butler_patch(url, staging_dir, patchfilename, gamedir):
     if Path(staging_dir).exists() and Path(staging_dir).is_dir():
         rmtree(staging_dir)
-    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-UAdastral-master',
+    run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-Ubeans-master',
          '--disable-ipv6=true',
          '--allow-piece-length-change=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
     '-d' + vars.TEMP_PATH, url], check=True)
@@ -126,19 +126,19 @@ def install():
 
     do_symlink()
 
-def update():
+def update(beta=False):
     """
     The simplest part of all of this.
     We already know the user wants to update, can update, and the local version we get the patch from.
     So at this point, it's just downloading, healing, and applying.
+    Also updates betas back to stable.
     """
 
     prepare_symlink()
-
+    is_in_beta = False
     # Prepare some variables
     local_version = versions.get_installed_version()
-
-    patch_json = versions.get_version_list()["patches"]
+    patch_json = versions.get_version_list(versions.isbeta())["patches"]
     patch_url = patch_json[local_version]["url"]
     patch_file = patch_json[local_version]["file"]
     patch_tempreq = patch_json[local_version]["tempreq"]
@@ -147,8 +147,7 @@ def update():
     # patch_tempreq is NOT the size of the patch, this is the size of the staging folder when commiting
     # Even though this is literally temporary, we say this is "permanent" since we want to check and use the same drive as the game
     free_space_check(patch_tempreq, 'permanent')
-
-    version_json = versions.get_version_list()["versions"]
+    version_json = versions.get_version_list(versions.isbeta())["versions"]
     signature_url = version_json[versions.get_installed_version()]["signature"]
     heal_url = version_json[versions.get_installed_version()]["heal"]
 
