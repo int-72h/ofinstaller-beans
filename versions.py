@@ -32,9 +32,11 @@ def update_version_file():
     try:
         old_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.revision', 'r')
         old_version = old_version_file.read()
+        if not old_version.isdigit():
+            raise FileNotFoundError
         new_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'w')
         # We unconditionally overwrite .revision since .adastral is the canonical file.
-        new_version_file.write('0.' + old_version + '.0')
+        json.dump({"version" : "0." + str(old_version)},new_version_file)
         new_version_file.close()
         old_version_file.close()
         return True
@@ -50,7 +52,7 @@ def get_latest_version():
 
 def get_installed_version():
     local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.revision', 'r')
-    local_version = local_version_file.read().rstrip('\n')
+    local_version = json.load(local_version_file)["version"]
     return local_version
 
 def check_for_updates():

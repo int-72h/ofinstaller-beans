@@ -16,7 +16,6 @@ from rich import print
 import gui
 import downloads
 import setup
-import troubleshoot
 import vars
 import versions
 import selfupdate
@@ -130,7 +129,6 @@ path will be the current work directory.'''
             if vars.INSTALLED:
                 gui.message(_("Open Fortress is already installed. Assuming a reinstallation."))
             downloads.install()
-            troubleshoot.apply_blacklist()
             print(_("The installation has successfully completed. Remember to restart Steam!"))
             exit(0)
         elif sys.argv[1] == "--update":
@@ -150,7 +148,6 @@ path will be the current work directory.'''
                 vars.INSTALLED = versions.update_version_file()
                 if versions.check_for_updates() == 'reinstall':
                     downloads.install()
-                    troubleshoot.apply_blacklist()
                 else:
                     downloads.update()
                 print(_("The update has successfully completed."))
@@ -163,8 +160,8 @@ path will be the current work directory.'''
         if ex is not SystemExit:
             traceback.print_exc()
             print(_("[italic magenta]----- Exception details above this line -----"))
-            print(_("[bold red]:warning: The program has failed. Post a screenshot in "
-                    "#troubleshooting on the Discord. :warning:[/bold red]"))
+            print(_("[bold red]:warning: The beans have failed. Post a screenshot in "
+                    "#beans-troubleshooting on the Discord. :warning:[/bold red]"))
             exit(1)
 
 if vars.SCRIPT_MODE:

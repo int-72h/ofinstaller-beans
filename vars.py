@@ -21,12 +21,8 @@ INSTALL_PATH = None
 TF2C_PATH = None
 
 SCRIPT_MODE = len(sys.argv) > 1
-TARGET_GAME = "TF2 Classic" # supposed to help with localisation, but we'll see
 DATA_DIR = "/open_fortress/"
-SOURCE_URL = 'https://beans.adastral.net/kachemak/'
-
-BLACKLIST_URL = 'https://tf2classic.org/serverlist/blacklist.php'
-BLACKLIST_PATH = '/tf2classic/cfg/server_blacklist.txt'
+SOURCE_URL = 'https://adastral.net/beans/'
 
 UPDATE_HASH_URL_WINDOWS = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_windows'
 UPDATE_HASH_URL_LINUX = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_linux'
