@@ -126,19 +126,17 @@ def install():
 
     do_symlink()
 
-def update(beta=False):
+def update():
     """
     The simplest part of all of this.
     We already know the user wants to update, can update, and the local version we get the patch from.
     So at this point, it's just downloading, healing, and applying.
-    Also updates betas back to stable.
     """
 
     prepare_symlink()
-    is_in_beta = False
     # Prepare some variables
     local_version = versions.get_installed_version()
-    patch_json = versions.get_version_list(versions.isbeta())["patches"]
+    patch_json = versions.get_version_list()["patches"]
     patch_url = patch_json[local_version]["url"]
     patch_file = patch_json[local_version]["file"]
     patch_tempreq = patch_json[local_version]["tempreq"]
@@ -147,7 +145,7 @@ def update(beta=False):
     # patch_tempreq is NOT the size of the patch, this is the size of the staging folder when commiting
     # Even though this is literally temporary, we say this is "permanent" since we want to check and use the same drive as the game
     free_space_check(patch_tempreq, 'permanent')
-    version_json = versions.get_version_list(versions.isbeta())["versions"]
+    version_json = versions.get_version_list()["versions"]
     signature_url = version_json[versions.get_installed_version()]["signature"]
     heal_url = version_json[versions.get_installed_version()]["heal"]
 

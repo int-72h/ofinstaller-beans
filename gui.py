@@ -26,8 +26,7 @@ def main_menu():
     print(_("""Welcome to beans. Enter a number to continue.\n
         1 - Install or reinstall the game
         2 - Check for and apply any available updates
-        3 - Verify and repair game files
-        4 - Opt into beta build (Don't do this)"""))
+        3 - Verify and repair game files"""))
     user_choice = int(input())
     if user_choice == 1:
         message(_("Starting the download for the game... You may see some errors that are safe to ignore."), 3)
@@ -46,18 +45,11 @@ def main_menu():
             message_end(_("The installation has successfully completed. Remember to restart Steam!"), 0)
 
     elif user_choice == 3:
-        version_json = versions.get_version_list(versions.isbeta())["versions"]
+        version_json = versions.get_version_list()["versions"]
         downloads.butler_verify(vars.SOURCE_URL + version_json[versions.get_installed_version()][
             "signature"], vars.INSTALL_PATH + vars.DATA_DIR, vars.SOURCE_URL + version_json[
             versions.get_installed_version()]["heal"])
         message_end(_("The verification process has completed, and any corruption has been repaired."), 0)
-    elif user_choice == 4:
-        if versions.get_latest_version() == versions.get_installed_version():
-            downloads.update(True)
-            message_end(_("The update has successfully completed."), 0)
-        elif versions.get_latest_version(True) == versions.get_installed_version():
-            message_end("You're already on the latest beta version!",0)
-
     else:
         message(_("Invalid choice. Please retry."))
         main_menu()
