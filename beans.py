@@ -140,7 +140,6 @@ path will be the current work directory.'''
                 selfupdate.check_downloader_update()
             setup.setup_path_script()
             setup.setup_binaries()
-
             if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
                 vars.INSTALLED = True
 

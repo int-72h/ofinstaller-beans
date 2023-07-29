@@ -28,7 +28,11 @@ def update_version_file():
     number.
     We just write a .adastral file with the next revision number. We'll deal with semver later.
     """
+
     try:
+        if path.exists(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral'):
+            get_installed_version()
+            return True
         old_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.revision', 'r')
         old_version = old_version_file.read()
         if not old_version.strip().isdigit():
@@ -46,7 +50,7 @@ def update_version_file():
 
 
 def get_latest_version():
-    return sorted(get_version_list()["versions"].keys(), reverse=True)[0]
+    return str(sorted([int(x) for x in get_version_list()["versions"].keys()], reverse=True)[0])
 
 def get_installed_version():
     local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'r')
@@ -93,7 +97,7 @@ def check_for_updates():
             gui.message_end(_("We have nothing to do. Goodbye!"), 0)
 
     # Now we're checking the latest version, to see if we're already up-to-date.
-    latest_version = sorted(version_json.keys(), reverse=True)[0]
+    latest_version = get_latest_version()
     if local_version == latest_version:
         if gui.message_yes_no(_("We think we've found an existing up-to-date installation of the game. Do you want to reinstall it?"), False):
             return False
