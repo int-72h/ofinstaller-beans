@@ -72,9 +72,13 @@ def wizard():
         versions.get_version_list()
 
         # Check if the game is already installed, for the purposes of running update_version_file() safely
-        if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
+        if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral'):
+            vars.INSTALLED = True
+        elif os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + '.revision') or os.path.exists(
+                vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
             vars.INSTALLED = True
             versions.update_version_file()
+
 
         # All of the choice logic is handled in this function directly.
         gui.main_menu()

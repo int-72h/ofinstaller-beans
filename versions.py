@@ -34,10 +34,6 @@ def update_version_file():
         old_version = old_version_file.read()
         if not old_version.isdigit():
             raise FileNotFoundError
-        new_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'w')
-        # We unconditionally overwrite .revision since .adastral is the canonical file.
-        json.dump({"version" : "0." + str(old_version)},new_version_file)
-        new_version_file.close()
         old_version_file.close()
         return True
     except FileNotFoundError:
@@ -51,7 +47,7 @@ def get_latest_version():
     return sorted(get_version_list()["versions"].keys(), reverse=True)[0]
 
 def get_installed_version():
-    local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.revision', 'r')
+    local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'r')
     local_version = json.load(local_version_file)["version"]
     return local_version
 
@@ -61,15 +57,15 @@ def check_for_updates():
     """
 
     # This probably was already communicated to the user in update_version_file(), but if version.txt doesn't exist, skip updating.
-    if not path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'version.txt'):
+    if not path.exists(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral'):
         if gui.message_yes_no(_("No game installation detected at given sourcemods path. Do you want to install the game?")):
             return False
         else:
             gui.message_end(_("We have nothing to do. Goodbye!"), 0)
 
     try:
-        local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + 'rev.txt', 'r')
-        local_version = local_version_file.read().rstrip('\n')
+        local_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'r')
+        local_version = json.loads(local_version_file.read())["version"]
     except ValueError:
         if gui.message_yes_no(_("We can't read the version of your installation. It could be corrupted. Do you want to reinstall the game?"), False):
             return False

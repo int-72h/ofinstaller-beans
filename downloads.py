@@ -44,7 +44,11 @@ def extract(filename, endpath, size):
     # read .tar.zst file (decompression)
     with ZstdTarFile(path.join(vars.TEMP_PATH, filename), mode='r') as tar:
         for member in tqdm(iterable=tar.getmembers(), total=len(tar.getmembers())):
-            tar.extract(member=member, path=endpath)
+            try:
+                tar.extract(member=member, path=endpath)
+            except PermissionError:
+                if "gameinfo.txt" in endpath:
+                    continue
 
 def butler_verify(signature, gamedir, remote):
     run([vars.BUTLER_BINARY, 'verify', signature, gamedir, '--heal=archive,' + remote], check=True)
@@ -113,7 +117,7 @@ def install():
     last_key = list(version_json.keys())[-1]
     lastver = version_json[last_key]
 
-    prepare_symlink()
+    ##prepare_symlink()
 
     gui.message(_("Getting the archive..."), 0)
 
@@ -124,7 +128,7 @@ def install():
 
     extract(lastver["file"], vars.INSTALL_PATH, lastver["postsz"])
 
-    do_symlink()
+    ##do_symlink()
 
 def update():
     """
@@ -143,7 +147,8 @@ def update():
 
     # Filesize check for butler-staging...
     # patch_tempreq is NOT the size of the patch, this is the size of the staging folder when commiting
-    # Even though this is literally temporary, we say this is "permanent" since we want to check and use the same drive as the game
+    # Even though this is literally temporary, we say this is "permanent" since we want to check
+    # and use the same drive as the game
     free_space_check(patch_tempreq, 'permanent')
     version_json = versions.get_version_list()["versions"]
     signature_url = version_json[versions.get_installed_version()]["signature"]
@@ -153,4 +158,4 @@ def update():
     butler_verify(vars.SOURCE_URL + signature_url, vars.INSTALL_PATH + vars.DATA_DIR, vars.SOURCE_URL + heal_url)
     butler_patch(vars.SOURCE_URL + patch_url, vars.INSTALL_PATH + '/butler-staging', patch_file, vars.INSTALL_PATH + vars.DATA_DIR)
 
-    do_symlink()
+    ##do_symlink()

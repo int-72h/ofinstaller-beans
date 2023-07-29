@@ -22,10 +22,10 @@ TF2C_PATH = None
 
 SCRIPT_MODE = len(sys.argv) > 1
 DATA_DIR = "/open_fortress/"
-SOURCE_URL = 'https://adastral.net/beans/'
+SOURCE_URL = 'https://beans.adastral.net/'
 
-UPDATE_HASH_URL_WINDOWS = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_windows'
-UPDATE_HASH_URL_LINUX = SOURCE_URL + 'https://adastral.net/beans/tf2cd_sha512sum_linux'
+UPDATE_HASH_URL_WINDOWS = SOURCE_URL + 'https://beans.adastral.net/beans_sha512sum_windows'
+UPDATE_HASH_URL_LINUX = SOURCE_URL + 'https://beans.adastral.net/beans_sha512sum_linux'
 
 UPDATE_DOWNLOAD_URL = 'https://openfortress.fun/download'
 
