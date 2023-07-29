@@ -1,5 +1,4 @@
 from pathlib import Path
-from tkinter import filedialog, Tk
 from shutil import disk_usage, rmtree
 from gettext import gettext as _
 from gettext import ngettext as _N
@@ -84,11 +83,10 @@ def free_space_check(size, cat):
     if cat == 'temporary':
         if disk_usage(vars.TEMP_PATH)[2] < size:
             if gui.message_yes_no(_("You don't have enough free space in your computer's default temporary folder for this. A minimum of %s is required. Select alternate temporary folder?") % pretty_size(size), 1):
-                root = Tk()
-                root.withdraw()
                 try:
                     while disk_usage(vars.TEMP_PATH)[2] < size:
-                        vars.TEMP_PATH = filedialog.askdirectory()
+                        vars.TEMP_PATH = gui.message_dir(_("Please, enter the location of the "
+                                                           "temporary directory.\n"))
                         if disk_usage(vars.TEMP_PATH)[2] < size:
                             gui.message(_("Still not enough space at specified path. Retry, and select a different drive if available."))
                 except TypeError:
