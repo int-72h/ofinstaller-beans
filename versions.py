@@ -26,15 +26,17 @@ def update_version_file():
     """
     The previous launcher/updater leaves behind a .revision file with the old revision
     number.
-    To avoid file bloat, we reuse this, but replace it with the game's semantic version number.
-    To obtain the game's semantic version number, we simply format it as 0.rev.0.
+    We just write a .adastral file with the next revision number. We'll deal with semver later.
     """
     try:
         old_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.revision', 'r')
         old_version = old_version_file.read()
-        if not old_version.isdigit():
+        if not old_version.strip().isdigit():
             raise FileNotFoundError
         old_version_file.close()
+        new_version_file = open(vars.INSTALL_PATH + vars.DATA_DIR + '.adastral', 'w')
+        json.dump({"version":old_version.strip()},new_version_file)
+        new_version_file.close()
         return True
     except FileNotFoundError:
         if gui.message_yes_no(_("We can't read the version of your installation. It could be corrupted. Do you want to reinstall the game?"), False):
