@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup environment
         run: |
-          pip install zstd rich httpx tqdm pyinstaller python-gettext
+          pip install pyzstd rich httpx tqdm pyinstaller python-gettext
       - name: Do localisations
         run: |
           ./GenerateMO.sh
@@ -33,7 +33,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install gettext python3-tk
-          pip install zstd rich httpx tqdm pyinstaller
+          pip install pyzstd rich httpx tqdm pyinstaller
       - name: Build Linux
         run: |
           ./GenerateMO.sh
