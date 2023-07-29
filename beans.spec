@@ -31,7 +31,6 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=data_generator(),
-    hiddenimports=["tkinter"],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
