@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: windows
-          path: dist/adastral.exe
+          path: dist/beans.exe
   export-linux:
     name: Linux Export
     runs-on: ubuntu-20.04
@@ -42,5 +42,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: linux
-          path: dist/adastral
+          path: dist/beans
           
