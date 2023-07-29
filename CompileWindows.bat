@@ -1,1 +1,1 @@
-pyinstaller adastral.spec
+pyinstaller beans.spec

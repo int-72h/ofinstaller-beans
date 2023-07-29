@@ -1,4 +1,4 @@
-name: "TF2C Build"
+name: "build the beans"
 on: push
 
 jobs:

@@ -1,2 +1,2 @@
 #!/bin/sh
-pyinstaller adastral.spec
+pyinstaller beans.spec
