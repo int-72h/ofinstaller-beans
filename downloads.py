@@ -1,3 +1,4 @@
+import stat
 from pathlib import Path
 from shutil import disk_usage, rmtree
 from gettext import gettext as _
@@ -50,9 +51,11 @@ def extract(filename, endpath, size):
                     continue
 
 def butler_verify(signature, gamedir, remote):
+    gameinfo_bodge()
     run([vars.BUTLER_BINARY, 'verify', signature, gamedir, '--heal=archive,' + remote], check=True)
 
 def butler_patch(url, staging_dir, patchfilename, gamedir):
+    gameinfo_bodge()
     if Path(staging_dir).exists() and Path(staging_dir).is_dir():
         rmtree(staging_dir)
     run([vars.ARIA2C_BINARY, '--max-connection-per-server=16', '-Ubeans-master',
@@ -60,6 +63,7 @@ def butler_patch(url, staging_dir, patchfilename, gamedir):
          '--allow-piece-length-change=true', '--max-concurrent-downloads=16', '--optimize-concurrent-downloads=true', '--check-certificate=false', '--check-integrity=true', '--auto-file-renaming=false', '--continue=true', '--allow-overwrite=true', '--console-log-level=error', '--summary-interval=0', '--bt-hash-check-seed=false', '--seed-time=0',
     '-d' + vars.TEMP_PATH, url], check=True)
     gui.message(_("Patching your game with the new update, please wait patiently."), 1)
+    gameinfo_bodge() ## bodge it AGAIN.
     run([vars.BUTLER_BINARY, 'apply', '--staging-dir=' + staging_dir, path.join(vars.TEMP_PATH, patchfilename), gamedir], check=True)
     if Path(staging_dir).exists() and Path(staging_dir).is_dir():
         rmtree(staging_dir)
@@ -128,13 +132,17 @@ def install():
 
     ##do_symlink()
 
+def gameinfo_bodge():
+    if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
+        os.chmod(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt', 0o644)
+
+
 def update():
     """
     The simplest part of all of this.
     We already know the user wants to update, can update, and the local version we get the patch from.
     So at this point, it's just downloading, healing, and applying.
     """
-
     prepare_symlink()
     # Prepare some variables
     local_version = versions.get_installed_version()
