@@ -151,6 +151,11 @@ def update():
     patch_file = patch_json[local_version]["file"]
     patch_tempreq = patch_json[local_version]["tempreq"]
 
+    gameinfo = ""
+    if os.path.exists(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt'):
+        f = open(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt','r')
+        gameinfo = f.read()
+        f.close()
     # Filesize check for butler-staging...
     # patch_tempreq is NOT the size of the patch, this is the size of the staging folder when commiting
     # Even though this is literally temporary, we say this is "permanent" since we want to check
@@ -163,5 +168,8 @@ def update():
     # Finally, verify and heal with the information we've gathered.
     butler_verify(vars.SOURCE_URL + signature_url, vars.INSTALL_PATH + vars.DATA_DIR, vars.SOURCE_URL + heal_url)
     butler_patch(vars.SOURCE_URL + patch_url, vars.INSTALL_PATH + '/butler-staging', patch_file, vars.INSTALL_PATH + vars.DATA_DIR)
-
+    if gameinfo != "":
+        f = open(vars.INSTALL_PATH + vars.DATA_DIR + 'gameinfo.txt','w')
+        f.write(gameinfo)
+        f.close()
     ##do_symlink()
