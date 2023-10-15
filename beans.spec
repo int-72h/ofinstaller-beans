@@ -8,23 +8,22 @@ from platform import system
 import glob
 
 def data_generator():
-	datas = []
-	datas.append(('Binaries/ca-certificates.crt', '.'))
-	if system() == 'Windows':
-		datas.append(('Binaries/butler.exe', '.'))
-		datas.append(('Binaries/aria2c.exe', '.'))
-		datas.append(('Binaries/7z.dll', '.'))
-		datas.append(('Binaries/c7zip.dll', '.'))
-	else:
-		datas.append(('Binaries/butler', '.'))
-		datas.append(('Binaries/aria2c', '.'))
-		datas.append(('Binaries/7z.so', '.'))
-		datas.append(('Binaries/libc7zip.so', '.'))
-	
-	for p in glob.iglob("locale/**/*.mo", recursive=True):
-		datas.append((p,os.path.dirname(p)))
-	
-	return datas
+    datas = []
+    datas.append(('Binaries/ca-certificates.crt', '.'))
+    if system() == 'Windows':
+        datas.append(('Binaries/butler.exe', '.'))
+        datas.append(('Binaries/aria2c.exe', '.'))
+        datas.append(('Binaries/7z.dll', '.'))
+        datas.append(('Binaries/c7zip.dll', '.'))
+        datas.append(('Binaries/vcredist.exe','.'))
+    else:
+        datas.append(('Binaries/butler', '.'))
+        datas.append(('Binaries/aria2c', '.'))
+
+    for p in glob.iglob("locale/**/*.mo", recursive=True):
+        datas.append((p,os.path.dirname(p)))
+
+    return datas
 
 a = Analysis(
     ['beans.py'],

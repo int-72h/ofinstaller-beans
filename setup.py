@@ -110,6 +110,7 @@ def setup_binaries():
             # When running as a script, we just select the Binaries folder directly for Aria2 and Butler.
             vars.ARIA2C_BINARY = 'Binaries/aria2c.exe'
             vars.BUTLER_BINARY = 'Binaries/butler.exe'
+            vars.VCREDIST = 'Binaries/vcredist.exe'
     else:
         # If we're running on Linux...
         if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):

@@ -44,6 +44,11 @@ def sanity_check():
     if not stdin or not stdin.isatty():
         print(_("Looks like we're running in the background. We don't want that, so we're exiting."))
         exit(1)
+    if system() == 'Windows':
+        print(_("We need to install vcredist, give us a moment..."))
+        run([vars.VCREDIST,'/install','/passive','/norestart'],check=True)
+        print(_("Done!"))
+
 
 if sys.stdout.encoding == 'ascii':
     sys.stdout.reconfigure(encoding='utf-8')
