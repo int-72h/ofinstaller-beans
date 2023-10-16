@@ -13,9 +13,11 @@ def data_generator():
     if system() == 'Windows':
         datas.append(('Binaries/butler.exe', '.'))
         datas.append(('Binaries/aria2c.exe', '.'))
+        datas.append(('Binaries/ca-certificates.crt', '.'))
     else:
         datas.append(('Binaries/butler', '.'))
         datas.append(('Binaries/aria2c', '.'))
+        datas.append(('Binaries/ca-certificates.crt', '.'))
 
     for p in glob.iglob("locale/**/*.mo", recursive=True):
         datas.append((p,os.path.dirname(p)))
