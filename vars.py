@@ -19,7 +19,6 @@ ARIA2C_BINARY = None
 BUTLER_BINARY = None
 INSTALL_PATH = None
 TF2C_PATH = None
-VCREDIST = None
 
 SCRIPT_MODE = len(sys.argv) > 1
 DATA_DIR = "/open_fortress/"

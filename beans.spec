@@ -13,7 +13,6 @@ def data_generator():
     if system() == 'Windows':
         datas.append(('Binaries/butler.exe', '.'))
         datas.append(('Binaries/aria2c.exe', '.'))
-        datas.append(('Binaries/vcredist.exe','.'))
     else:
         datas.append(('Binaries/butler', '.'))
         datas.append(('Binaries/aria2c', '.'))
