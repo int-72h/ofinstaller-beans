@@ -48,7 +48,7 @@ def sanity_check():
         print(_("We need to download vcredist, give us a moment..."))
         run([vars.ARIA2C_BINARY, "https://aka.ms/vs/17/release/vc_redist.x86.exe","-d",vars.TEMP_PATH])
         print(_("now installing..."))
-        run([os.path.join(vars.TEMP_PATH, "vc_redist.x86.exe"),'/install','/passive','/norestart'])
+        run([os.path.join(vars.TEMP_PATH, "VC_redist.x86.exe"),'/install','/passive','/norestart'])
         print(_("Done!"))
 
 
@@ -71,10 +71,10 @@ gettext.textdomain('beans')
 
 def wizard():
     try:
+        setup.setup_binaries()
         sanity_check()
         if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
             selfupdate.check_downloader_update()
-        setup.setup_binaries()
         setup.setup_path(False)
         versions.get_version_list()
 
