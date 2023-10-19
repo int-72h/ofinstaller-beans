@@ -46,7 +46,7 @@ def sanity_check():
         exit(1)
     if system() == 'Windows':
         print(_("We need to download vcredist, give us a moment..."))
-        run([vars.ARIA2C_BINARY, "https://aka.ms/vs/17/release/vc_redist.x86.exe","-d",vars.TEMP_PATH])
+        run([vars.ARIA2C_BINARY, "https://aka.ms/vs/17/release/vc_redist.x86.exe","--check-certificate=false","-d",vars.TEMP_PATH])
         print(_("now installing..."))
         run([os.path.join(vars.TEMP_PATH, "VC_redist.x86.exe"),'/install','/passive','/norestart'])
         print(_("Done!"))
