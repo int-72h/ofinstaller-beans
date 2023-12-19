@@ -94,7 +94,8 @@ def wizard():
         if ex is not SystemExit:
             traceback.print_exc()
             print(_("[italic magenta]----- Exception details above this line -----"))
-            print(_("[bold red]:warning: The program has failed. Post a screenshot in #technical-issues on the Discord. :warning:[/bold red]"))
+            print(_("[bold red]:warning: The program has failed. Post a screenshot in the respective troubleshooting channels on the Open Fortress "
+                    "Discord. :warning:[/bold red]"))
             if os.environ.get("WT_SESSION"):
                 print(_("[bold]You are safe to close this window."))
             else:
