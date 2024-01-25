@@ -5,6 +5,8 @@ jobs:
   export-windows:
     name: Windows Export
     runs-on: windows-latest
+    env:
+      PYINSTALLER_COMPILE_BOOTLOADER: 1
     steps:
       - name: Checkout main repo
         uses: actions/checkout@v2
