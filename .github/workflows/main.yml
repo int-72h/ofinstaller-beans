@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest
     env:
       PYINSTALLER_COMPILE_BOOTLOADER: 1
-      PYINSTALLER_BOOTLOADER_WAF_ARGS: --gcc --target-arch=32bit
+      PYINSTALLER_BOOTLOADER_WAF_ARGS: --gcc
     steps:
       - name: Checkout main repo
         uses: actions/checkout@v2
